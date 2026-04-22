@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">🏋️ AI Fitness Zone</div>
+</div>
+
+<div class="hero">
+<div class="box">
+
+<h2>Exercise</h2>
+
+<form method="post">
+<select name="level">
+<option value="beginner">Beginner</option>
+<option value="advanced">Advanced</option>
+</select>
+
+<button>Show</button>
+</form>
+
+{% if ex %}
+<p>{{ex}}</p>
+{% endif %}
+
+</div>
+</div>
+
+</body>
+</html>
+<!-- 🛒 SHOPPING -->
+<div id="shop" class="section">
+<div class="content-box">
+
+<h1>🛒 Fitness Store</h1>
+<p>Recommended products for your fitness goals</p>
+
+<div class="grid">
+
+<div class="card">
+<h3>💪 Whey Protein</h3>
+<p>Best for muscle gain and recovery</p>
+<p>₹2500</p>
+<button>Add to Cart</button><br><br>
+<button>Buy Now</button>
+</div>
+
+<div class="card">
+<h3>🥤 Protein Powder</h3>
+<p>Daily protein intake support</p>
+<p>₹1800</p>
+<button>Add to Cart</button><br><br>
+<button>Buy Now</button>
+</div>
+
+<div class="card">
+<h3>🍫 Protein Bars</h3>
+<p>Quick energy snack</p>
+<p>₹500 (Pack)</p>
+<button>Add to Cart</button><br><br>
+<button>Buy Now</button>
+</div>
+
+<div class="card">
+<h3>🥜 Almonds</h3>
+<p>Rich in healthy fats & protein</p>
+<p>₹800/kg</p>
+<button>Add to Cart</button><br><br>
+<button>Buy Now</button>
+</div>
+
+<div class="card">
+<h3>🌰 Cashews</h3>
+<p>Boosts energy and immunity</p>
+<p>₹900/kg</p>
+<button>Add to Cart</button><br><br>
+<button>Buy Now</button>
+</div>
+
+<div class="card">
+<h3>🥜 Peanuts</h3>
+<p>Affordable protein source</p>
+<p>₹200/kg</p>
+<button>Add to Cart</button><br><br>
+<button>Buy Now</button>
+</div>
+
+</div>
+
+</div>
+</div>

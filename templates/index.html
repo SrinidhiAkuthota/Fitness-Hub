@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Fitness Dashboard</title>
+
+<style>
+/* 🔥 FORCE 4 ITEMS IN ONE ROW (FINAL FIX) */
+#shop .shop-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+    width: 100% !important;
+}
+
+#shop .shop-card {
+    width: 100% !important;
+}
+.shop-card {
+    padding: 10px;
+}
+
+#shop .shop-card img {
+    width: 100% !important;
+    height: 180px !important;
+    object-fit: cover !important;
+}
+
+#shop.section {
+    display: block !important;
+}
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    font-family: Arial;
+    background: black;
+    padding-top: 80px;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #111;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 1000;
+}
+
+
+.logo { color: cyan; font-size: 20px; }
+
+.nav-links a {
+    margin: 5px;
+    padding: 8px 15px;
+    border: 2px solid red;
+    border-radius: 20px;
+    color: cyan;
+    text-decoration: none;
+}
+
+.cart-btn {
+    color: yellow;
+    border: 2px solid yellow;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* SECTIONS */
+
+.section {
+    min-height: 100vh;
+    display: block;
+    padding: 40px 0;
+}
+/* CONTENT WIDTH FIX */
+.content-box {
+    width: 100%;
+    max-width: 1800px;   /* increase space */
+    margin: auto;
+}
+.shop-card {
+    min-width: 0;
+    padding: 10px;
+}
+/* GRID */
+#shop .shop-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 15px !important;
+}
+
+/* CARD */
+.card {
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* 🔥 SHOP GRID (4 PER ROW) */
+.shop-grid {
+    display: grid;
+    gap: 20px;
+}
+.shop-card {
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* SAME IMAGE SIZE */
+.shop-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* HOVER EFFECT */
+.shop-card:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+h1 { color: cyan; }
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+<div class="logo">🏋️ AI Fitness Zone</div>
+
+<div class="nav-links">
+<a href="#home">Home</a>
+<a href="#workout">Workout</a>
+<a href="#diet">Diet</a>
+<a href="#exercise">Exercise</a>
+<a href="#shop">Shop</a>
+</div>
+
+<div class="cart-btn" onclick="viewCart()">🛒 Cart</div>
+</div>
+
+<!-- HOME -->
+<div id="home" class="section">
+<div class="content-box">
+<h1>Welcome to AI Fitness</h1>
+<p>Your personal fitness assistant 💪</p>
+</div>
+</div>
+
+<!-- WORKOUT -->
+<div id="workout" class="section">
+<div class="content-box">
+<h1>Workout Plans</h1>
+
+<div class="grid">
+<div class="card">Chest<br>Bench Press</div>
+<div class="card">Shoulders<br>Shoulder Press</div>
+<div class="card">Arms<br>Bicep Curl</div>
+<div class="card">Legs<br>Squats</div>
+</div>
+
+</div>
+</div>
+
+<!-- DIET -->
+<div id="diet" class="section">
+<div class="content-box">
+<h1>Diet Plans</h1>
+
+<div class="grid">
+<div class="card">Weight Loss<br>Salads, Fruits</div>
+<div class="card">Weight Gain<br>Rice, Chicken</div>
+</div>
+
+</div>
+</div>
+
+<!-- EXERCISE -->
+<div id="exercise" class="section">
+<div class="content-box">
+
+<h1>Exercises</h1>
+
+<div class="grid">
+<div class="card" onclick="showExercise('yoga')">🧘 Yoga</div>
+<div class="card" onclick="showExercise('strength')">💪 Strength</div>
+<div class="card" onclick="showExercise('cardio')">🏃 Cardio</div>
+<div class="card" onclick="showExercise('flexibility')">🤸 Flexibility</div>
+</div>
+
+<div id="exercise-details" style="margin-top:20px;"></div>
+
+</div>
+</div>
+
+<div id="shop" class="section">
+<div class="content-box">
+
+<h1>🛒 Fitness Store</h1>
+
+<div id="shop" class="section">
+<div class="content-box">
+
+<h1 style="text-align:center;">🛒 Fitness Store</h1>
+
+<div style="
+display:grid;
+grid-template-columns: repeat(4, 1fr);
+gap:20px;
+max-width:1400px;
+margin:auto;
+">
+
+<!-- ITEM 1 -->
+<div class="shop-card">
+<img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c">
+<h3>Whey Protein</h3>
+₹2500<br>
+<button onclick="addToCart('Whey Protein',2500)">Add to Cart</button><br><br>
+<button onclick="buyNow('Whey Protein')">Buy Now</button>
+</div>
+
+<!-- ITEM 2 -->
+<div class="shop-card">
+<img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1">
+<h3>Protein Powder</h3>
+₹1800<br>
+<button onclick="addToCart('Protein Powder',1800)">Add to Cart</button><br><br>
+<button onclick="buyNow('Protein Powder')">Buy Now</button>
+</div>
+
+<!-- ITEM 3 -->
+<div class="shop-card">
+<img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2">
+<h3>Almonds</h3>
+₹800<br>
+<button onclick="addToCart('Almonds',800)">Add to Cart</button><br><br>
+<button onclick="buyNow('Almonds')">Buy Now</button>
+</div>
+
+<!-- ITEM 4 -->
+<div class="shop-card">
+<img src="https://images.unsplash.com/photo-1590080877777-26cbb5f1c4d1">
+<h3>Cashews</h3>
+₹900<br>
+<button onclick="addToCart('Cashews',900)">Add to Cart</button><br><br>
+<button onclick="buyNow('Cashews')">Buy Now</button>
+</div>   <!-- ✅ IMPORTANT -->
+
+<div class="shop-card">
+<img src="https://www.glnc.org.au/wp-content/uploads/2020/08/shutterstock_381856165.jpg">
+<h3>Peanuts</h3>
+₹110<br>
+<button onclick="addToCart('Peanuts',110)">Add to Cart</button><br><br>
+<button onclick="buyNow('Peanuts')">Buy Now</button>
+</div>
+
+<!-- ITEM 6 -->
+<div class="shop-card">
+<img src="https://img8.hkrtcdn.com/39078/prd_3907787-MuscleBlaze-Biozyme-Performance-Whey-4.4-lb-Rich-Chocolate_o.jpg">
+<h3>Protein Powder (Men)</h3>
+₹1110<br>
+<button onclick="addToCart('Protein Powder (Men)',1110)">Add to Cart</button><br><br>
+<button onclick="buyNow('Protein Powder (Men)')">Buy Now</button>
+</div>
+</div> <!-- ✅ GRID CLOSED -->
+</div>
+
+<!-- POPUP -->
+<div id="popup" style="
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#111;
+padding:20px;
+border-radius:10px;
+color:white;
+z-index:2000;
+text-align:center;
+">
+<h2 id="popup-text"></h2>
+<button onclick="closePopup()">OK</button>
+</div>
+
+<!-- SCRIPT -->
+<script>
+let cart = [];
+
+function showPopup(msg){
+document.getElementById("popup-text").innerText = msg;
+document.getElementById("popup").style.display="block";
+}
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+function addToCart(item,price){
+cart.push({item,price});
+showPopup(item+" added to cart 🛒");
+}
+
+function buyNow(item){
+showPopup("Order Successful for "+item+" ✅");
+}
+
+function viewCart(){
+let text="";
+let total=0;
+
+cart.forEach(i=>{
+text+=i.item+" - ₹"+i.price+"\n";
+total+=i.price;
+});
+
+if(text==="") showPopup("Cart is empty 🛒");
+else showPopup(text+"Total: ₹"+total);
+}
+
+function showExercise(type){
+let box=document.getElementById("exercise-details");
+
+if(type==="yoga"){
+box.innerHTML="Surya Namaskar<br>Tree Pose<br>Cobra Pose";
+}
+if(type==="strength"){
+box.innerHTML="Push-ups<br>Squats<br>Deadlift";
+}
+if(type==="cardio"){
+box.innerHTML="Running<br>Cycling<br>Jump Rope";
+}
+if(type==="flexibility"){
+box.innerHTML="Stretching<br>Yoga Flow<br>Mobility drills";
+}
+}
+
+</script>
+
+</body>
+</html>

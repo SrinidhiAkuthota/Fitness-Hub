@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">🏋️ AI Fitness Zone</div>
+</div>
+
+<div class="hero">
+<div class="box">
+
+<h2>Workout</h2>
+
+<form method="post">
+<select name="goal">
+<option value="loss">Weight Loss</option>
+<option value="gain">Weight Gain</option>
+</select>
+
+<button>Get Plan</button>
+</form>
+
+{% if plan %}
+<p>{{plan}}</p>
+{% endif %}
+
+</div>
+</div>
+
+</body>
+</html>

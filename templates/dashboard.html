@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Fitness Dashboard</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<style>
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+html { scroll-behavior: smooth; }
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body { padding-top: 80px; }
+
+.cart-btn {
+    margin-right: 20px;
+    padding: 10px 15px;
+    border: 2px solid yellow;
+    border-radius: 20px;
+    color: yellow;
+    cursor: pointer;
+}
+
+.section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-box {
+    background: rgba(0,0,0,0.75);
+    padding: 40px;
+    border-radius: 15px;
+    width: 700px;
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.nav-links a {
+    margin: 8px;
+    padding: 10px 20px;
+    border: 2px solid red;
+    border-radius: 25px;
+    color: cyan;
+    text-decoration: none;
+}
+
+h1 { color: cyan; }
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">🏋️ AI Fitness Zone</div>
+
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#workout">Workout Plan</a>
+        <a href="#diet">Diet Plan</a>
+        <a href="#exercise">Exercise</a>
+        <a href="#shop">Shop</a>
+    </div>
+
+    <div class="cart-btn" onclick="viewCart()">🛒 Cart (<span id="cart-count">0</span>)</div>
+</div>
+
+<!-- HOME -->
+<div id="home" class="section">
+<div class="content-box">
+<h1>Welcome to AI Fitness</h1>
+<p>Your personal fitness assistant 💪</p>
+</div>
+</div>
+
+<div id="workout" class="section">
+    <div class="content-box">
+
+        <h1>Workout Plans</h1>
+
+        <div class="grid">
+
+            <div class="card">
+                <h3 onclick="toggleBox('chest')" style="cursor:pointer;">▶ Chest</h3>
+                <div id="chest" style="display:none;">
+                    Bench Press<br>Push-ups<br>Incline Press
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 onclick="toggleBox('shoulders')" style="cursor:pointer;">▶ Shoulders</h3>
+                <div id="shoulders" style="display:none;">
+                    Shoulder Press<br>Lateral Raise<br>Front Raise
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 onclick="toggleBox('arms')" style="cursor:pointer;">▶ Arms</h3>
+                <div id="arms" style="display:none;">
+                    Bicep Curl<br>Tricep Dip<br>Hammer Curl
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 onclick="toggleBox('legs')" style="cursor:pointer;">▶ Legs</h3>
+                <div id="legs" style="display:none;">
+                    Squats<br>Lunges<br>Leg Press
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- EXERCISE -->
+<div id="exercise" class="section">
+<div class="content-box">
+
+<h1>Exercises</h1>
+
+<div class="grid">
+
+<div class="card" onclick="showExercise('yoga')">
+<h3>🧘 Yoga</h3>
+Click to view
+</div>
+
+<div class="card" onclick="showExercise('strength')">
+<h3>💪 Strength</h3>
+Click to view
+</div>
+
+<div class="card" onclick="showExercise('cardio')">
+<h3>🏃 Cardio</h3>
+Click to view
+</div>
+
+<div class="card" onclick="showExercise('flex')">
+<h3>🤸 Flexibility</h3>
+Click to view
+</div>
+
+</div>
+
+<!-- IMAGE DISPLAY -->
+<div id="exercise-images" style="margin-top:20px;"></div>
+
+</div>
+</div>
+
+
+<!-- SCRIPT -->
+<script>
+function showExercise(type){
+    let box = document.getElementById("exercise-images");
+
+    if(type === "yoga"){
+        box.innerHTML = `
+        <img src="https://i.pinimg.com/originals/e5/a0/eb/e5a0eb0ad3432e5482ce951ec01b2ca0.gif" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">
+        <img src="https://elements-resized.envatousercontent.com/elements-video-cover-images/b100b5c4-ac40-4670-aa78-4fe0474924c2/video_preview/video_preview_0001.jpg?w=500&cf_fit=cover&q=85&format=auto&s=f3e7739439c262985e47b4310f001f697fd83eb54e5f1a64f4c634fed486ec35" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">
+        <img src="https://www.orgoallnatural.com/blog/wp-content/uploads/2024/10/surya-namaskar.jpg" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">
+        <img src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpkgrCWCKOmuvFmHbKLBf60asDKYF18a7rg&s`;
+    }
+
+    if(type === "strength"){
+        box.innerHTML = `
+        <img src="https://media.post.rvohealth.io/wp-content/uploads/2019/09/Squat-to-overhead-raise.gif" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">
+        <img src="https://media.post.rvohealth.io/wp-content/uploads/2019/10/Bicep-curls.gif" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">
+        <img src="https://media.post.rvohealth.io/wp-content/uploads/2023/08/LiquidHonestIbisbill-size_restricted.gif" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">
+        <img src="https://cdn-life.dailyburn.com/life/wp-content/uploads/2015/08/10015544/Tricep-Push-Up_2.gif" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">`;
+    }
+
+    if(type === "cardio"){
+        box.innerHTML = `
+        <img src="https://www.shape.com/thmb/DjCIHGX6cWaIniuqHeBAAreNE08=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/best-cardio-exercises-promo-2000-498cbfb8f07541b78572bf810e7fb600.jpg" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">
+        <img src="https://hips.hearstapps.com/hmg-prod/images/cardio-workout-66a361953b3c5.jpg?crop=0.669xw:1.00xh;0.166xw,0&resize=640:*" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">
+        <img src="https://publish.purewow.net/wp-content/uploads/sites/2/2020/03/cardio-at-home-jumping-jacks.gif?fit=680%2C841" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">
+        <img src="https://i.pinimg.com/originals/c6/36/91/c636919ee9d0a81c2afb059ab5ccafd3.gif" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">
+        `;
+    }
+
+    if(type === "flex"){
+        box.innerHTML = `
+        <img src="https://assets.vogue.com/photos/5891df4b12a7b1df212c840d/master/pass/karlie-stretch-5.gif" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">
+        <img src="https://cdn.prod.website-files.com/66c501d753ae2a8c705375b6/67fe0447643ba443d6a39e90_67ea81551a440a62ddce87d6_AF_Flex-and-Mobility_WorldsGreatestStretch.gif" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">
+        <img src="https://cdn-prod.medicalnewstoday.com/content/images/articles/326/326799/a-gif-of-the-knee-hug.gif" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">
+        <img src="https://media.post.rvohealth.io/wp-content/uploads/2023/08/DecisiveGeneralAtlanticridleyturtle-size_restricted.gif" style="width:300px;height:200px;object-fit:cover;margin:10px;border-radius:10px;">
+        `;
+    }
+}
+</script>
+<!-- DIET -->
+<div id="diet" class="section">
+    <div class="content-box">
+        <h1>Diet Plans</h1>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Weight Loss</h3>
+                Salads<br>
+                Fruits<br>
+                Low carbs
+            </div>
+
+            <div class="card">
+                <h3>Weight Gain</h3>
+                Rice<br>
+                Chicken<br>
+                High protein
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- SHOP -->
+<div id="shop" class="section">
+<div class="content-box">
+
+<h1>🛒 Fitness Store</h1>
+
+<div class="shop-grid">
+
+<div class="card">
+<img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTBX5qzXfdTyQEJe9nf-1wXkNR7TaOPHbmpItWWwqLvc5uzUVvXF-T85HLvAJIFwPFpXmAFBOo_NsXetaR1bIGU9sfSiVO2M-oqJllqnPzfMmg6knwgfSUbVw" width="100%">
+<h3>Whey Protein</h3>
+₹2500<br>
+<button onclick="addToCart('Whey Protein',2500)">Add to Cart</button><br><br>
+<button onclick="buyNow('Whey Protein',2500)">Buy Now</button>
+</div>
+
+<div class="card">
+<img src="https://domf5oio6qrcr.cloudfront.net/medialibrary/10073/conversions/protein-powders-thumb.jpg" width="100%">
+<h3>Protein Powder</h3>
+₹1800<br>
+<button onclick="addToCart('Protein Powder',1800)">Add to Cart</button><br><br>
+<button onclick="buyNow('Protein Powder',1800)">Buy Now</button>
+</div>
+
+<div class="card">
+<img src="https://mangalorespice.com/cdn/shop/files/Almonds-Badam-Mangalore-Spice_b9a3f5be-8377-4970-8804-e5d031a6b4a8.jpg?v=1734692928&width=416" width="100%">
+<h3>Almonds</h3>
+₹800<br>
+<button onclick="addToCart('Almonds',800)">Add to Cart</button><br><br>
+<button onclick="buyNow('Almonds',800)">Buy Now</button>
+</div>
+
+<div class="card">
+<img src="https://assets.clevelandclinic.org/transform/ec440b31-4766-4167-81b5-fb4eece02c16/cashews-511301902" width="100%">
+<h3>Cashews</h3>
+₹900<br>
+<button onclick="addToCart('Cashews',900)">Add to Cart</button><br><br>
+<button onclick="buyNow('Cashews',900)">Buy Now</button>
+</div>
+
+<div class="card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrwrRkvPgy-k1OsQkAZTnqPZbqX-sBY73WSw&s" width="100%">
+<h3>Peanuts</h3>
+₹200<br>
+<button onclick="addToCart('Peanuts',200)">Add to Cart</button><br><br>
+<button onclick="buyNow('Peanuts',200)">Buy Now</button>
+</div>
+
+<div class="card">
+<img src="https://img8.hkrtcdn.com/39078/prd_3907787-MuscleBlaze-Biozyme-Performance-Whey-4.4-lb-Rich-Chocolate_o.jpg" width="100%">
+<h3>Protein powder (men)</h3>
+₹5000<br>
+<button onclick="addToCart('Protein powder (men)',5000)">Add to Cart</button><br><br>
+<button onclick="buyNow('Protein powder (men)',5000)">Buy Now</button>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- POPUP -->
+<div id="popup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+background:#111; padding:20px; border-radius:10px; color:white; z-index:2000; text-align:center;">
+<h2 id="popup-text"></h2>
+<button onclick="closePopup()">OK</button>
+</div>
+<!-- ORDER FORM -->
+<div id="orderForm" style="
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#111;
+padding:25px;
+border-radius:10px;
+color:white;
+z-index:3000;
+width:300px;
+text-align:center;
+">
+
+<h3>Place Order</h3>
+
+<label>Quantity:</label><br>
+<input type="number" id="qty" value="1" min="1"><br><br>
+
+<label>Address:</label><br>
+<input type="text" id="address" placeholder="Enter address"><br><br>
+
+<label>Phone:</label><br>
+<input type="text" id="phone" placeholder="Enter phone"><br><br>
+
+<button onclick="placeOrder()">Next</button><br><br>
+<button onclick="closeForm()">Cancel</button>
+
+</div>
+
+
+<!-- PAYMENT SECTION -->
+<div id="paymentSection" style="
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#111;
+padding:25px;
+border-radius:10px;
+color:white;
+z-index:4000;
+width:320px;
+text-align:center;
+">
+
+<h3>Select Payment Method</h3>
+
+<select id="paymentMethod" onchange="togglePaymentFields()">
+    <option value="cod">Cash on Delivery</option>
+    <option value="card">Card</option>
+    <option value="upi">UPI</option>
+</select><br><br>
+
+<!-- CARD -->
+<div id="cardDetails" style="display:none;">
+<input type="text" placeholder="Card Number"><br><br>
+<input type="text" placeholder="Expiry (MM/YY)"><br><br>
+<input type="text" placeholder="CVV"><br><br>
+</div>
+
+<!-- UPI -->
+<div id="upiDetails" style="display:none;">
+<select>
+    <option>Paytm</option>
+    <option>PhonePe</option>
+    <option>Google Pay</option>
+</select><br><br>
+<input type="text" placeholder="Enter UPI ID"><br><br>
+</div>
+
+<button onclick="confirmPayment()">Confirm Payment</button><br><br>
+<button onclick="closePayment()">Cancel</button>
+
+</div>
+
+
+<!-- ORDER HISTORY -->
+<div id="orderHistoryBox" style="
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#111;
+padding:20px;
+border-radius:10px;
+color:white;
+z-index:5000;
+width:350px;
+max-height:400px;
+overflow:auto;
+">
+
+<h3>📦 Order History</h3>
+<div id="orderList"></div><br>
+
+<button onclick="closeHistory()">Close</button>
+
+</div>
+
+<!-- ORDER BUTTON -->
+<div class="cart-btn" onclick="viewHistory()">📦 Orders</div>
+
+
+<script>
+let cart = [];
+let currentItem = "";
+let currentPrice = 0;
+
+
+// FIX FIRST CLICK BUG
+window.onload = function(){
+    togglePaymentFields();
+};
+
+function updateCartUI(){
+    document.getElementById("cart-count").innerText = cart.length;
+}
+
+function showPopup(msg){
+    document.getElementById("popup-text").innerText = msg;
+    document.getElementById("popup").style.display="block";
+}
+
+function closePopup(){
+    document.getElementById("popup").style.display="none";
+}
+
+function addToCart(item,price){
+    cart.push({item,price});
+    updateCartUI();
+    showPopup(item + " added to cart 🛒");
+}
+
+function buyNow(item,price){
+    currentItem = item;
+    currentPrice = price;
+    document.getElementById("orderForm").style.display="block";
+}
+
+function closeForm(){
+    document.getElementById("orderForm").style.display="none";
+}
+
+function placeOrder(){
+    let qty = document.getElementById("qty").value;
+    let address = document.getElementById("address").value;
+    let phone = document.getElementById("phone").value;
+
+    if(address=="" || phone==""){
+        alert("Please fill all details");
+        return;
+    }
+
+    let total = qty * currentPrice;
+
+    let deliveryDate = new Date();
+    deliveryDate.setDate(deliveryDate.getDate()+5);
+
+    window.tempOrder = {
+        item: currentItem,
+        qty: qty,
+        total: total,
+        address: address,
+        phone: phone,
+        delivery: deliveryDate.toDateString()
+    };
+
+    document.getElementById("orderForm").style.display="none";
+    document.getElementById("paymentSection").style.display="block";
+    togglePaymentFields();
+}
+
+function togglePaymentFields(){
+    let method = document.getElementById("paymentMethod").value;
+
+    document.getElementById("cardDetails").style.display =
+        method === "card" ? "block" : "none";
+
+    document.getElementById("upiDetails").style.display =
+        method === "upi" ? "block" : "none";
+}
+
+function closePayment(){
+    document.getElementById("paymentSection").style.display="none";
+}
+function confirmPayment(){
+
+    console.log("Confirm clicked");
+
+    let method = document.getElementById("paymentMethod").value;
+
+    let order = window.tempOrder;
+
+    if(!order){
+        alert("No order found ❌");
+        return;
+    }
+
+    order.payment = method;
+    order.status = "Pending";
+
+    // SEND TO BACKEND
+    fetch('/save_order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(order)
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert("✅ Order Placed Successfully");
+    })
+    .catch(err => {
+        console.error("Error:", err);
+        alert("Backend not connected ❌");
+    });
+
+    document.getElementById("paymentSection").style.display="none";
+}
+function checkoutCart(total){
+    currentItem = "Cart Items";
+    currentPrice = total;
+    document.getElementById("orderForm").style.display="block";
+    closePopup();
+}
+
+function viewCart(){
+    let text="";
+    let total=0;
+
+    cart.forEach(i=>{
+        text += i.item + " - ₹" + i.price + "<br>";
+        total += i.price;
+    });
+
+    if(cart.length === 0){
+        showPopup("Cart is empty 🛒");
+    } 
+    else{
+        document.getElementById("popup-text").innerHTML =
+            "Cart:<br>" + text +
+            "<br><b>Total: ₹" + total + "</b><br><br>" +
+            `<button onclick="checkoutCart(${total})"
+            style="padding:10px;background:green;color:white;border:none;border-radius:5px;">
+            Buy Now / Checkout
+            </button>`;
+
+        document.getElementById("popup").style.display="block";
+    }
+}
+
+function viewHistory(){
+
+    fetch('/get_orders')
+    .then(res => res.json())
+    .then(data => {
+
+        let list = document.getElementById("orderList");
+
+        if(data.length === 0){
+            list.innerHTML = "No orders yet 😢";
+        } else {
+            let html = "";
+
+            data.forEach((o, index)=>{
+
+    let color = "orange";
+    if(o.status === "Shipped") color = "blue";
+    if(o.status === "Delivered") color = "green";
+    if(o.status === "Cancelled") color = "red";
+
+    html += `
+    <div style="border-bottom:1px solid gray; margin-bottom:10px;">
+    <b>${o.item}</b><br>
+    Qty: ${o.qty}<br>
+    ₹${o.total}<br>
+    ${o.payment.toUpperCase()}<br>
+
+    <b>Status:</b> <span style="color:${color};">${o.status}</span><br>
+
+    Delivery: ${o.delivery}<br>
+    `;
+
+    // ✅ SHOW CANCEL BUTTON ONLY IF PENDING
+    if(o.status === "Pending"){
+        html += `
+        <button onclick="cancelOrder(${index})"
+        style="background:red; color:white; border:none; padding:5px; margin-top:5px;">
+        Cancel Order
+        </button>
+        `;
+    }
+
+    html += `</div>`;
+});
+
+            list.innerHTML = html;
+        }
+
+        document.getElementById("orderHistoryBox").style.display="block";
+    });
+}
+
+function closeHistory(){
+    document.getElementById("orderHistoryBox").style.display="none";
+}
+function cancelOrder(index){
+
+    console.log("Cancel clicked for index:", index);
+
+    fetch('/cancel_order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ index: index })   // 🔥 VERY IMPORTANT
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        alert("Order Cancelled ❌");
+        viewHistory();   // refresh
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Cancel failed ❌");
+    });
+}
+</script>
+<script>
+
+function toggleBox(id){
+    var box = document.getElementById(id);
+
+    if (!box) {
+        alert("Error: Element not found -> " + id);
+        return;
+    }
+
+    if (box.style.display === "none" || box.style.display === "") {
+        box.style.display = "block";
+    } else {
+        box.style.display = "none";
+    }
+}
+</script>
+<script>
+function toggleBox(id){
+    var box = document.getElementById(id);
+
+    if (!box) {
+        alert("Error: Element not found -> " + id);
+        return;
+    }
+
+    if (box.style.display === "none" || box.style.display === "") {
+        box.style.display = "block";
+    } else {
+        box.style.display = "none";
+    }
+}
+</script>
+<div class="cart-btn" onclick="window.location.href='/admin'">🔐 Admin</div>
+</div>
+</body>
+</html>
