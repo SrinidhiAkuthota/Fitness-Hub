@@ -1,3 +1,4 @@
+🚀 Live Demo: https://fitness-hub-1-5ujq.onrender.com
 # Fitness Hub
 
 Fitness Hub is a comprehensive online fitness and wellness platform that helps users achieve their health goals through workout plans, exercise programs, yoga sessions, and fitness product shopping.
@@ -28,8 +29,6 @@ The goal of Fitness Hub is to provide users with a single platform for fitness t
 * CSS
 * JavaScript
 * SQLite / Database
-
-
 
 ## Future Enhancements
 
